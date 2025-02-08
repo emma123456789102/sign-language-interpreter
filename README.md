@@ -1,10 +1,12 @@
-
+#BSL-Interpreter-AR
 📁 BSL-Interpreter-AR
 │── 📂 data            # BSL dataset & extracted keypoints
 │── 📂 models          # Trained machine learning models
 │── 📂 scripts         # Python & R scripts for processing
 │── 📂 ar_display      # AR overlay for captions (Unity/OpenCV)
 │── README.md         # Project documentation
+
+
 🛠️ Installation
 1️⃣ Install Dependencies
 Make sure you have Python 3.7 - 3.10 installed. Then, install required libraries:
@@ -21,6 +23,8 @@ bsl_env\Scripts\activate     # Windows
 3️⃣ Clone the Repository
 git clone https://github.com/your-repo/BSL-Interpreter-AR.git
 cd BSL-Interpreter-AR
+
+
 🎥 How It Works
 Step 1: Capture Video Input
 The AR glasses camera records the signer’s gestures in real-time.
