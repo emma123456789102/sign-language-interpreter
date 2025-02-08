@@ -94,8 +94,8 @@ cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
 ❌ Optimize for **real-time AR processing**
 
 ## 💡 Contributors
-- **Your Name** - Developer
-- **Contributor Name** - AI/ML Specialist
+- **Emma Davidson** - Developer
+- **everyone else** - AI/ML Specialist
 
 ## 📜 License
 This project is licensed under the **MIT License**.
