@@ -95,7 +95,7 @@ cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
 
 ## 💡 Contributors
 - **Emma Davidson** - Developer
-- **everyone else** - AI/ML Specialist
+- **Jade Ruthven** - ASL Signer & UREAL Developer
 
 ## 📜 License
 This project is licensed under the **MIT License**.
