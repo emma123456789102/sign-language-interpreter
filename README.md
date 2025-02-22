@@ -94,8 +94,10 @@ cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
 ❌ Optimize for **real-time AR processing**
 
 ## 💡 Contributors
-- **Emma Davidson** - Developer
-- **everyone else** - AI/ML Specialist
+- **Emma Davidson** - sign language to caption Developer
+- **Jade Ruthven** - ASL Signer & UREAL Developer
+- **Neil** - Animation investigator
+- **Annie O'Boyle** - Main reseacher for back ground knowledge
 
 ## 📜 License
 This project is licensed under the **MIT License**.
