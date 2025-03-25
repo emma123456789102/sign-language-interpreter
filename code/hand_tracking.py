@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import mediapipe as mp
 from tensorflow.keras.models import load_model
+from flask import Flask, jsonify
+import threading
 
 # Load the trained sign language recognition model
 model = load_model("sign_language_model.h5")
@@ -32,51 +34,70 @@ def predict_gesture(hand_roi):
     predicted_class = np.argmax(prediction)
     return chr(predicted_class + 65)  # Convert to letter (A-Z)
 
-while True:
-    ret, frame = video_stream.read()
-    if not ret:
-        break  # Exit if camera feed is lost
+current_gesture = "None"
 
-    frame = cv2.resize(frame, (FRAME_WIDTH, FRAME_HEIGHT))
-    frame = cv2.flip(frame, 1)  # Mirror for intuitive interaction
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+def get_current_gesture():
+    global current_gesture
+    return current_gesture
 
-    # Process frame with MediaPipe Hands
-    results = hands.process(rgb_frame)
+app = Flask(__name__)
 
-    if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            # Draw landmarks on the hand
-            mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+@app.route('/gesture', methods=['GET'])
+def get_gesture():
+    return jsonify({'gesture': current_gesture})
 
-            # Get bounding box around the hand
-            x_min, y_min = float("inf"), float("inf")
-            x_max, y_max = float("-inf"), float("-inf")
+def capture_loop():
+    global current_gesture
+    while True:
+        ret, frame = video_stream.read()
+        if not ret:
+            break  # Exit if camera feed is lost
 
-            for landmark in hand_landmarks.landmark:
-                x, y = int(landmark.x * FRAME_WIDTH), int(landmark.y * FRAME_HEIGHT)
-                x_min, y_min = min(x_min, x), min(y_min, y)
-                x_max, y_max = max(x_max, x), max(y_max, y)
+        frame = cv2.resize(frame, (FRAME_WIDTH, FRAME_HEIGHT))
+        frame = cv2.flip(frame, 1)  # Mirror for intuitive interaction
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            # Expand bounding box slightly
-            x_min, y_min = max(0, x_min - 20), max(0, y_min - 20)
-            x_max, y_max = min(FRAME_WIDTH, x_max + 20), min(FRAME_HEIGHT, y_max + 20)
+        # Process frame with MediaPipe Hands
+        results = hands.process(rgb_frame)
 
-            # Extract hand region
-            hand_roi = frame[y_min:y_max, x_min:x_max]
-            if hand_roi.shape[0] > 0 and hand_roi.shape[1] > 0:
-                gray_hand = cv2.cvtColor(hand_roi, cv2.COLOR_BGR2GRAY)
-                letter = predict_gesture(gray_hand)
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                # Draw landmarks on the hand
+                mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-                # Display prediction
-                cv2.putText(frame, letter, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                # Get bounding box around the hand
+                x_min, y_min = float("inf"), float("inf")
+                x_max, y_max = float("-inf"), float("-inf")
 
-    # Show frame
-    cv2.imshow("Live Feed - Hand Gesture Recognition", frame)
+                for landmark in hand_landmarks.landmark:
+                    x, y = int(landmark.x * FRAME_WIDTH), int(landmark.y * FRAME_HEIGHT)
+                    x_min, y_min = min(x_min, x), min(y_min, y)
+                    x_max, y_max = max(x_max, x), max(y_max, y)
 
-    if cv2.waitKey(1) & 0xFF == ord('x'):
-        break
+                # Expand bounding box slightly
+                x_min, y_min = max(0, x_min - 20), max(0, y_min - 20)
+                x_max, y_max = min(FRAME_WIDTH, x_max + 20), min(FRAME_HEIGHT, y_max + 20)
 
-# Cleanupsa
-video_stream.release()
-cv2.destroyAllWindows()
+                # Extract hand region
+                hand_roi = frame[y_min:y_max, x_min:x_max]
+                if hand_roi.shape[0] > 0 and hand_roi.shape[1] > 0:
+                    gray_hand = cv2.cvtColor(hand_roi, cv2.COLOR_BGR2GRAY)
+                    letter = predict_gesture(gray_hand)
+                    current_gesture = letter
+
+                    # Display prediction
+                    cv2.putText(frame, letter, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+        # Show frame
+        cv2.imshow("Live Feed - Hand Gesture Recognition", frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('x'):
+            break
+
+    # Cleanupsa
+    video_stream.release()
+    cv2.destroyAllWindows()
+
+threading.Thread(target=capture_loop, daemon=True).start()
+
+app.run(port=5000)

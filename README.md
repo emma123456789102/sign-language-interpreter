@@ -21,9 +21,18 @@ This project aims to develop a **British Sign Language (BSL) Interpreter** that 
 
 ## 🛠️ Installation
 ### 1️⃣ Install Dependencies
-Make sure you have **Python 3.7 - 3.10** installed. Then, install required libraries:
+Make sure you have **Python 3.7 - 3.10** installed. 
+
+
+### 2️⃣ Setup Virtual Environments
+The hand tracking and RASA have incompatoble package requirements, so two virtual environments should be configured
+
+# Terminal 1 (Hand Tracking)
 ```bash
-pip install mediapipe opencv-python numpy pandas tensorflow keras
+python -m venv venv_tracking
+source venv_tracking/bin/activate  # Mac/Linux
+venv_tracking\Scripts\activate     # Windows
+pip install mediapipe opencv-python numpy pandas tensorflow keras flask
 ```
 If using R for training:
 ```r
@@ -31,11 +40,12 @@ install.packages("randomForest")
 install.packages("keras")
 ```
 
-### 2️⃣ Setup Virtual Environment (Recommended)
+# Terminal 2 (RASA)
 ```bash
-python -m venv bsl_env
-source bsl_env/bin/activate  # Mac/Linux
-bsl_env\Scripts\activate     # Windows
+python -m venv venv_tracking
+source venv_tracking/bin/activate  # Mac/Linux
+venv_tracking\Scripts\activate     # Windows
+pip install rasa
 ```
 
 ### 3️⃣ Clone the Repository
@@ -88,6 +98,15 @@ Overlay text captions on **AR glasses** using OpenCV or Unity.
 cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 ```
 
+### 4️⃣ Run Virtual Environments
+Open three terminal windows. Run the tracking venv in terminal 1, then the rasa venv in terminals 2 and 3.
+
+Terminal 1: python code/hand_tracking.py
+Terminal 2: rasa run actions
+Terminal 3: rasa shell 
+
+If changing intents, retrain the model with 'rasa train' in a rasa venv.
+
 ## 📌 Challenges & Future Improvements
 ❌ Improve **BSL recognition accuracy** with a larger dataset
 ❌ Implement **sentence-level sign translation**
@@ -96,7 +115,7 @@ cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
 ## 💡 Contributors
 - **Emma Davidson** - sign language to caption Developer
 - **Jade Ruthven** - ASL Signer & UREAL Developer
-- **Neil** - Animation investigator
+- **Neil** - Dialogue Management and RASA integration
 - **Annie O'Boyle** - Main reseacher for back ground knowledge
 
 ## 📜 License
