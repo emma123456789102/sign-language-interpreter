@@ -42,9 +42,9 @@ install.packages("keras")
 
 # Terminal 2 (RASA)
 ```bash
-python -m venv venv_tracking
-source venv_tracking/bin/activate  # Mac/Linux
-venv_tracking\Scripts\activate     # Windows
+py -3.10 -m venv venv_rasa
+source venv_rasa/bin/activate  # Mac/Linux
+venv_rasa\Scripts\activate     # Windows
 pip install rasa
 ```
 
