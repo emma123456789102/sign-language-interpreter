@@ -15,11 +15,15 @@ If using R for training:
 
 install.packages("randomForest")
 install.packages("keras")
+
 2️⃣ Setup Virtual Environment (Recommended)
+
 python -m venv bsl_env
 source bsl_env/bin/activate  # Mac/Linux
 bsl_env\Scripts\activate     # Windows
+
 3️⃣ Clone the Repository
+
 git clone https://github.com/your-repo/BSL-Interpreter-AR.git
 cd BSL-Interpreter-AR
 🎥 How It Works
