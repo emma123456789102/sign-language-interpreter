@@ -1,5 +1,6 @@
-##Sign Language Interpreter: Dissertation Code Repository
-##Welcome to the code repository for my dissertation project, Sign Language Interpreter. This repository contains all the code, models, and resources developed during my research into using ##machine learning for translating sign language gestures into text.
+#Sign Language Interpreter: Dissertation Code Repository
+
+#Welcome to the code repository for my dissertation project, Sign Language Interpreter. This repository contains all the code, models, and resources developed during my research into using #machine learning for translating sign language gestures into text.
 
 -Table of Contents
 -Project Overview
