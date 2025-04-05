@@ -1,94 +1,71 @@
-# Dissertation Code Repository
-Welcome to the code repository for my dissertation project, SpectrumAI. This repository contains all code, data, and resources developed during my research into developing a machine learning-based pre-screening tool for early autism identification in children.
-## Table of Contents
+# sign-language-interpreter
 
-- [Project Overview](#project-overview)
-- [Repository Structure](#repository-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#mitlicense)
-- [Contact](#Emma Davidson)
+📁 BSL-Interpreter-AR
+│── 📂 data            # BSL dataset & extracted keypoints
+│── 📂 models          # Trained machine learning models
+│── 📂 scripts         # Python & R scripts for processing
+│── 📂 ar_display      # AR overlay for captions (Unity/OpenCV)
+│── README.md         # Project documentation
+🛠️ Installation
+1️⃣ Install Dependencies
+Make sure you have Python 3.7 - 3.10 installed. Then, install required libraries:
 
-## Project Overview
+pip install mediapipe opencv-python numpy pandas tensorflow keras
+If using R for training:
 
-[Provide a brief overview of your dissertation project. Discuss the research question, objectives, and significance of your work.]
+install.packages("randomForest")
+install.packages("keras")
+2️⃣ Setup Virtual Environment (Recommended)
+python -m venv bsl_env
+source bsl_env/bin/activate  # Mac/Linux
+bsl_env\Scripts\activate     # Windows
+3️⃣ Clone the Repository
+git clone https://github.com/your-repo/BSL-Interpreter-AR.git
+cd BSL-Interpreter-AR
+🎥 How It Works
+Step 1: Capture Video Input
+The AR glasses camera records the signer’s gestures in real-time.
 
-## Repository Structure
+import cv2
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    ret, frame = cap.read()
+    cv2.imshow("BSL Camera Feed", frame)
+    if cv2.waitKey(1) & 0xFF == ord("q"): break
+cap.release()
+cv2.destroyAllWindows()
+Step 2: Extract Hand & Pose Keypoints
+Using Mediapipe, we track hand and body movement.
 
-├── data
-│   ├── raw
-│   └── processed
-├── docs
-├── notebooks
-├── src
-│   ├── analysis
-│   └── visualization
-├── tests
-└── README.md
+import mediapipe as mp
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands()
+Step 3: Train AI Model (Using R or Python)
+Train a Random Forest Model in R
+library(randomForest)
+data <- read.csv("bsl_dataset.csv")
+model <- randomForest(label ~ ., data=data, ntree=200)
+saveRDS(model, "bsl_rf_model.rds")
+Train a Deep Learning Model in Python
+from tensorflow.keras.models import Sequential
+model = Sequential([...])
+model.fit(X_train, y_train, epochs=50, batch_size=16)
+model.save("bsl_model.h5")
+Step 4: Real-Time Captioning in AR
+Overlay text captions on AR glasses using OpenCV or Unity.
 
+cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+📌 Challenges & Future Improvements
+❌ Improve BSL recognition accuracy with a larger dataset ❌ Implement sentence-level sign translation ❌ Optimize for real-time AR processing
 
-- data/: Contains datasets used in the project.
-  - raw/: Unprocessed data.
-  - processed/: Data after cleaning and preprocessing.
-- docs/: Documentation and supplementary materials.
-- notebooks/: Jupyter notebooks for exploratory data analysis and prototyping.
-- src/: Source code for analysis and visualization.
-  - analysis/: Scripts for data analysis.
-  - visualization/: Scripts for generating plots and figures.
-- tests/: Unit tests for the codebase.
+💡 Contributors
+Emma Davidson - Developer
+Annie O'boyle  - Developer
+Neil - - Developer
+Sarah Jade Ruthven  - Developer
+Contributor Name - AI/ML Specialist
 
-## Installation
+📜 License
+This project is licensed under the MIT License.
 
-1. **Clone the repository:**
-
-   
-bash
-   git clone https://github.com/emma123456789102/sign-language-interpreter.git
-cd sign-language-interpreter
-
-
-2. **Set up a virtual environment:**
-
-   
-bash
-   python -m venv env
-source env/bin/activate      # macOS/Linux
-env\Scripts\activate         # Windows
-
-
-3. **Install the required packages:**
-
-   
-bash
-   pip install -r requirements.txt
-
-
-
-## Usage
-
-[Provide instructions on how to run your code. Include examples of commands and expected outputs.]
-
-bash
-python src/analysis/run_analysis.py --input data/processed/dataset.csv --output results/analysis_output.csv
-
-
-## Contributing
-
-I welcome contributions to this project. If you're interested in contributing, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch).
-3. Commit your changes (git commit -am 'Add new feature').
-4. Push to the branch (git push origin feature-branch).
-5. Open a Pull Request.
-
-Please ensure that your code adheres to the project's coding standards and includes appropriate tests.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For any questions or feedback, please contact me at [Davidsone381@gmail.com].
+🌟 Let’s break communication barriers with AI & AR! 🚀
