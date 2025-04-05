@@ -1,20 +1,20 @@
-Sign Language Interpreter: Dissertation Code Repository
-Welcome to the code repository for my dissertation project, Sign Language Interpreter. This repository contains all the code, models, and resources developed during my research into using machine learning for translating sign language gestures into text.
+##Sign Language Interpreter: Dissertation Code Repository
+##Welcome to the code repository for my dissertation project, Sign Language Interpreter. This repository contains all the code, models, and resources developed during my research into using ##machine learning for translating sign language gestures into text.
 
-Table of Contents
-Project Overview
+-Table of Contents
+-Project Overview
 
-Repository Structure
+-Repository Structure
 
-Installation
+-Installation
 
-Usage
+-Usage
 
-Contributing
+-Contributing
 
-License
+-License
 
-Contact
+-Contact
 
 Project Overview
 The Sign Language Interpreter project focuses on leveraging computer vision and machine learning techniques to build a system that can recognize and interpret sign language gestures in real-time. This project aims to bridge communication gaps between the Deaf community and the hearing world by providing an accessible, AI-driven translation tool.
