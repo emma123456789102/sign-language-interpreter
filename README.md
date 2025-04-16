@@ -61,13 +61,18 @@ Overlay text captions on AR glasses using OpenCV or Unity.
 cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 📌 Challenges & Future Improvements
 ❌ Improve BSL recognition accuracy with a larger dataset ❌ Implement sentence-level sign translation ❌ Optimize for real-time AR processing
+ 4️⃣ Connecting the glasses
+
+to run the unity, please run the launch.json file which is located within the repostory.
+once this is run also run the Flask_app.py once these are both run this should allow you to 
+run the programme.
 
 💡 Contributors
-Emma Davidson - Developer
-Annie O'boyle  - Developer
-Neil - - Developer
-Sarah Jade Ruthven  - Developer
-Contributor Name - AI/ML Specialist
+Emma Davidson - AI/ML Specialist/ Unity Developer /Rasa Developer 
+Annie O'boyle  - essay writter
+Neil - - Rasa Developer
+Sarah Jade Ruthven  - Unity Developer
+
 
 📜 License
 This project is licensed under the MIT License.
