@@ -4,9 +4,10 @@ import cv2
 import numpy as np
 import mediapipe as mp
 from tensorflow.keras.models import load_model
-
+import os
+import sys
 # Load your model
-model = load_model("code/sign_language_model.h5")
+model = load_model("code\sign_language_model.h5")
 
 # Set up MediaPipe for hand detection
 mp_hands = mp.solutions.hands
