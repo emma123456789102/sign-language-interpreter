@@ -1,0 +1,15 @@
+version: "3.1"
+
+intents:
+  - ask_current_gesture
+
+responses:
+  utter_current_gesture:
+    - text: "The current gesture is: {gesture}."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+actions:
+  - action_return_current_gesture

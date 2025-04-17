@@ -1,0 +1,9 @@
+version: "3.1"
+
+nlu:
+- intent: ask_current_gesture
+  examples: |
+    - What is the current gesture?
+    - What letter am I signing?
+    - Show me the gesture now
+    - What sign is this?

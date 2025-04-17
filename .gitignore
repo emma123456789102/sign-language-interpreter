@@ -1,0 +1,4 @@
+venv/
+venv_tracking/
+venv_rasa/
+.rasa/

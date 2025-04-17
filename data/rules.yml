@@ -1,0 +1,7 @@
+version: "3.1"
+
+rules:
+- rule: Get current gesture
+  steps:
+    - intent: ask_current_gesture
+    - action: action_return_current_gesture
