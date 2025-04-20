@@ -8,9 +8,19 @@
 │── README.md         # Project documentation
 🛠️ Installation
 1️⃣ Install Dependencies
-Make sure you have Python 3.7 - 3.10 installed. Then, install required libraries:
+Make sure you have **Python 3.7 - 3.10** installed. 
 
-pip install mediapipe opencv-python numpy pandas tensorflow keras
+
+### 2️⃣ Setup Virtual Environments
+The hand tracking and RASA have incompatible package requirements, so two virtual environments should be configured
+
+# Terminal 1 (Hand Tracking)
+```bash
+python -m venv venv_tracking
+source venv_tracking/bin/activate  # Mac/Linux
+venv_tracking\Scripts\activate     # Windows
+pip install mediapipe opencv-python numpy pandas tensorflow keras flask
+```
 If using R for training:
 
 install.packages("randomForest")
@@ -59,6 +69,16 @@ Step 4: Real-Time Captioning in AR
 Overlay text captions on AR glasses using OpenCV or Unity.
 
 cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+### 4️⃣ Run Virtual Environments
+Open three terminal windows. Run the tracking venv in terminal 1, then the rasa venv in terminals 2 and 3.
+
+Terminal 1: python code/hand_tracking.py
+Terminal 2: rasa run actions
+Terminal 3: rasa shell 
+
+If changing intents, retrain the model with 'rasa train' in a rasa venv.
+
 📌 Challenges & Future Improvements
 ❌ Improve BSL recognition accuracy with a larger dataset ❌ Implement sentence-level sign translation ❌ Optimize for real-time AR processing
  4️⃣ Connecting the glasses
@@ -68,10 +88,10 @@ once this is run also run the Flask_app.py once these are both run this should a
 run the programme.
 
 💡 Contributors
-Emma Davidson - AI/ML Specialist/ Unity Developer /Rasa Developer 
-Annie O'boyle  - essay writter
-Neil - - Rasa Developer
-Sarah Jade Ruthven  - Unity Developer
+**Emma Davidson** - AI/ML Specialist/ Unity Developer /Rasa Developer 
+**Annie O'boyle**  - essay writter
+**Neil** - Dialogue Management and RASA integration
+**Sarah Jade Ruthven**  - Unity Developer
 
 
 📜 License

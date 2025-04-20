@@ -8,8 +8,7 @@ import threading
 import os
 from tensorflow.keras.models import load_model
 
-model_path = "C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/code/sign_language_model.h5"
-model=load_model(model_path)
+model_path = "sign_language_model.h5"
 if not os.path.isfile(model_path):
     raise FileNotFoundError(f"Model file not found: {model_path}")
 
@@ -26,7 +25,7 @@ mp_drawing = mp.solutions.drawing_utils
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.7)
 
 # Video capture
-video_stream = cv2.VideoCapture(0)
+video_stream = cv2.VideoCapture(1)
 
 # Frame dimensions
 FRAME_WIDTH = 600
@@ -34,7 +33,7 @@ FRAME_HEIGHT = 400
 
 def preprocess_hand_roi(img):
     """ Prepares the hand ROI for CNN model prediction. """
-    img = cv2.resize(img, (28, 28))  # Resize to match model input
+    img = cv2.resize(img, (64, 64))  # Resize to match model input
     img = np.expand_dims(img, axis=[0, -1])  # Add batch and channel dimensions
     img = img / 255.0  # Normalize
     return img
@@ -46,7 +45,9 @@ def predict_gesture(hand_roi):
     predicted_class = np.argmax(prediction)
     return chr(predicted_class + 65)  # Convert to letter (A-Z)
 
-current_gesture = "None"
+current_gesture = None
+test_gesture = None
+confidence_count = 0
 
 def get_current_gesture():
     global current_gesture
@@ -59,7 +60,7 @@ def get_gesture():
     return jsonify({'gesture': current_gesture})
 
 def capture_loop():
-    global current_gesture
+    global current_gesture, test_gesture, confidence_count
     while True:
         ret, frame = video_stream.read()
         if not ret:
@@ -95,7 +96,16 @@ def capture_loop():
                 if hand_roi.shape[0] > 0 and hand_roi.shape[1] > 0:
                     gray_hand = cv2.cvtColor(hand_roi, cv2.COLOR_BGR2GRAY)
                     letter = predict_gesture(gray_hand)
-                    current_gesture = letter
+
+                    if letter == test_gesture:
+                        confidence_count += 1
+                    else:
+                        test_gesture = letter
+                        confidence_count = 0
+
+                    if confidence_count > 5:   # Only update if gesture remains constant for 5 frames
+                        current_gesture = letter
+                        confidence_count = 0
 
                     # Display prediction
                     cv2.putText(frame, letter, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
