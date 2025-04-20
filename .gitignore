@@ -3,3 +3,4 @@ venv_tracking/
 venv_rasa/
 .rasa/
 dataset/
+actions/__pycache__/
