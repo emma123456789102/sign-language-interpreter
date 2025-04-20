@@ -5,8 +5,20 @@ from tensorflow.keras.models import load_model
 from flask import Flask, jsonify
 import threading
 
-# Load the trained sign language recognition model
-model = load_model("sign_language_model.h5")
+import os
+from tensorflow.keras.models import load_model
+
+model_path = "C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/code/sign_language_model.h5"
+model=load_model(model_path)
+if not os.path.isfile(model_path):
+    raise FileNotFoundError(f"Model file not found: {model_path}")
+
+try:
+    model = load_model(model_path)
+    print("✅ Model loaded successfully!")
+except Exception as e:
+    print("❌ Error loading model:", e)
+
 
 # Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands
@@ -22,7 +34,7 @@ FRAME_HEIGHT = 400
 
 def preprocess_hand_roi(img):
     """ Prepares the hand ROI for CNN model prediction. """
-    img = cv2.resize(img, (64, 64))  # Resize to match model input
+    img = cv2.resize(img, (28, 28))  # Resize to match model input
     img = np.expand_dims(img, axis=[0, -1])  # Add batch and channel dimensions
     img = img / 255.0  # Normalize
     return img
