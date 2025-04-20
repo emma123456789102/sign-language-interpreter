@@ -11,7 +11,7 @@ import requests
 
 class ActionReturnCurrentGesture(Action):
     def name(self):
-        return "action_return_current_gesture"
+        return "action_gesture_return_current"
 
     def run(self, dispatcher, tracker, domain):
         try:

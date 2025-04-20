@@ -2,14 +2,44 @@ version: "3.1"
 
 intents:
   - ask_current_gesture
+  - quiz_start
+  - quiz_confirm_ready
+  - quiz_repeat
+  - quiz_end
+
+slots:
+  quiz_letters:
+    type: list
+    influence_conversation: false
+    mappings: []
+
+  quiz_current_letter:
+    type: text
+    influence_conversation: false
+    mappings: []
+
+  quiz_score:
+    type: float
+    influence_conversation: false
+    mappings: []
+
+  quiz_index:
+    type: float
+    influence_conversation: false
+    mappings: []
 
 responses:
   utter_current_gesture:
     - text: "The current gesture is: {gesture}."
 
+actions:
+  - action_gesture_return_current
+  - action_quiz_start
+  - action_quiz_check_letter
+  - action_quiz_repeat_letter
+  - action_quiz_end
+  - action_gesture_reset
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-actions:
-  - action_return_current_gesture

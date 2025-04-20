@@ -55,10 +55,6 @@ def get_current_gesture():
 
 app = Flask(__name__)
 
-@app.route('/gesture', methods=['GET'])
-def get_gesture():
-    return jsonify({'gesture': current_gesture})
-
 def capture_loop():
     global current_gesture, test_gesture, confidence_count
     while True:
@@ -119,6 +115,18 @@ def capture_loop():
     # Cleanupsa
     video_stream.release()
     cv2.destroyAllWindows()
+
+# API endpoints
+@app.route('/gesture', methods=['GET'])
+def get_gesture():
+    return jsonify({'gesture': current_gesture})
+
+@app.route('/gesture/reset', methods=['POST'])
+def reset_gesture():
+    global current_gesture
+    current_gesture = None
+    print("[Tracking] Gesture reset.")
+    return jsonify({'status': 'ok', 'gesture': current_gesture})
 
 threading.Thread(target=capture_loop, daemon=True).start()
 

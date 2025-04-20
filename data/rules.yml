@@ -4,4 +4,25 @@ rules:
 - rule: Get current gesture
   steps:
     - intent: ask_current_gesture
-    - action: action_return_current_gesture
+    - action: action_gesture_return_current
+
+# Quiz rules
+- rule: Start quiz
+  steps:
+    - intent: quiz_start
+    - action: action_quiz_start
+
+- rule: Check quiz letter
+  steps:
+    - intent: quiz_confirm_ready
+    - action: action_quiz_check_letter
+
+- rule: Repeat current quiz letter
+  steps:
+    - intent: quiz_repeat
+    - action: action_quiz_repeat_letter
+
+- rule: End quiz
+  steps:
+    - intent: quiz_end
+    - action: action_quiz_end

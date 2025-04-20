@@ -79,6 +79,10 @@ Terminal 3: rasa shell
 
 If changing intents, retrain the model with 'rasa train' in a rasa venv.
 
+# RASA shell
+'What gesture is this?'
+'Test me'
+
 📌 Challenges & Future Improvements
 ❌ Improve BSL recognition accuracy with a larger dataset ❌ Implement sentence-level sign translation ❌ Optimize for real-time AR processing
  4️⃣ Connecting the glasses
