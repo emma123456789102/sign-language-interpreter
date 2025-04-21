@@ -5,9 +5,9 @@ import numpy as np
 import mediapipe as mp
 from tensorflow.keras.models import load_model
 import os
-import sys
-# Load your modelpi
-model = load_model("code\sign_language_model.h5")
+
+# Load your model (use raw string or forward slashes for Windows paths)
+model = load_model(r"code/sign_language_model.h5")
 
 # Set up MediaPipe for hand detection
 mp_hands = mp.solutions.hands
@@ -23,15 +23,15 @@ cap = cv2.VideoCapture(0)
 
 def preprocess_hand(img):
     img = cv2.resize(img, (28, 28))
-    img = np.expand_dims(img, axis=(0, -1))  # (1, 28, 28, 1)
+    img = np.expand_dims(img, axis=(0, -1))  # Shape: (1, 28, 28, 1)
     img = img.astype("float32") / 255.0
     return img
 
 def predict_gesture(hand_img):
     processed = preprocess_hand(hand_img)
-    prediction = model.predict(processed)
+    prediction = model.predict(processed, verbose=0)
     class_index = np.argmax(prediction)
-    return chr(class_index + 65)  # A-Z (adjust as needed)
+    return chr(class_index + 65)  # A-Z
 
 # Background camera loop
 def camera_loop():
@@ -69,4 +69,11 @@ threading.Thread(target=camera_loop, daemon=True).start()
 
 # Run Flask server
 if __name__ == "__main__":
+    # Enable CORS for Unity requests if needed
+    from flask_cors import CORS
+    CORS(app)
+
     app.run(host="0.0.0.0", port=5000)
+# Release resources
+cap.release()
+cv2.destroyAllWindows()
