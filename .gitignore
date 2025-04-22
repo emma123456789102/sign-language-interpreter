@@ -1,7 +1,4 @@
 venv/
-venv_tracking/
-venv_rasa/
-.rasa/
 dataset/
 actions/__pycache__/
 code/__pycache__/
