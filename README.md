@@ -26,32 +26,28 @@ Edit
 Ensure you have Python 3.7–3.10 installed.
 
 2️⃣ Setup Virtual Environments
-Hand tracking and RASA have incompatible dependencies, so two virtual environments are required.
+The hand tracking and RASA have incompatible package requirements, so two virtual environments should be configured
 
-Terminal 1: Hand Tracking (Python)
-bash
-Copy
-Edit
+# Terminal 1 (Hand Tracking)
+```bash
 python -m venv venv_tracking
-source venv_tracking/bin/activate     # Mac/Linux
-venv_tracking\Scripts\activate        # Windows
-
-pip install mediapipe opencv-python numpy pandas tensorflow keras flask
+source venv_tracking/bin/activate  # Mac/Linux
+venv_tracking\Scripts\activate     # Windows
+pip install mediapipe opencv-python numpy pandas tensorflow keras flask flask-cors
+```
 If using R for training:
-R
-Copy
-Edit
+
 install.packages("randomForest")
 install.packages("keras")
-Terminal 2: RASA
-bash
-Copy
-Edit
-python -m venv venv_rasa
-source venv_rasa/bin/activate         # Mac/Linux
-venv_rasa\Scripts\activate            # Windows
 
-pip install rasa
+# Terminal 2 (RASA)
+```bash
+py -3.10 -m venv venv_rasa
+source venv_rasa/bin/activate  # Mac/Linux
+venv_rasa\Scripts\activate     # Windows
+pip install rasa pyttsx3 SpeechRecognition pyaudio
+```
+
 🎥 How It Works
 📷 Step 1: Capture Video Input
 Use OpenCV to access the webcam:
@@ -104,35 +100,26 @@ Copy
 Edit
 cv2.putText(frame, "Hello!", (50, 50),
             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
 🧪 Running the Project
-Open three terminal windows:
+4️⃣ Run Virtual Environments
+For testing / demo:
+Just run 'python run_all.py'. This will setup everything in the correct venv.
 
-Terminal 1: Activate tracking venv and run hand tracking:
+For debugging:
+Open four terminal windows. Run the tracking venv in terminal 1, then the rasa venv in terminals 2, 3 and 4.
 
-bash
-Copy
-Edit
-source venv_tracking/bin/activate
-python scripts/hand_tracking.py
-Terminal 2: Activate RASA venv and run actions:
+Terminal 1: python code/hand_tracking.py
+Terminal 2: rasa run actions
+Terminal 3: rasa run --enable-api --cors "*" --debug
+Terminal 4: python handlers/speech_handler.py 
 
-bash
-Copy
-Edit
-source venv_rasa/bin/activate
-rasa run actions
-Terminal 3: Run RASA shell:
+If changing intents, retrain the model with 'rasa train' in a rasa venv.
 
-bash
-Copy
-Edit
-rasa shell
-To update RASA intents, run:
+# RASA shell
+'What gesture is this?'
+'Test me'
 
-bash
-Copy
-Edit
-rasa train
 🕶️ Connecting to the AR Glasses (Unity)
 To run the Unity integration:
 

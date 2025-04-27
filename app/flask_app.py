@@ -19,7 +19,7 @@ app = Flask(__name__)
 current_gesture = "None"
 
 # Video stream
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 def preprocess_hand(img):
     img = cv2.resize(img, (28, 28))
@@ -58,6 +58,10 @@ def camera_loop():
                     current_gesture = predict_gesture(gray)
         else:
             current_gesture = "None"
+
+        cv2.imshow("Hand Tracking", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 # Flask endpoint
 @app.route('/gesture', methods=['GET'])

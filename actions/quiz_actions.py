@@ -53,9 +53,9 @@ class ActionCheckQuizLetter(Action):
 
         if detected.upper() == expected.upper():
             score += 1
-            dispatcher.utter_message(text="Yes! That's '{expected}'")
+            dispatcher.utter_message(text="Excellent! That is '{expected}'")
         else:
-            dispatcher.utter_message(text=f"That's not right. Expected '{expected}' and saw '{detected}'.")
+            dispatcher.utter_message(text=f"That's not right. I expected '{expected}' but you signed '{detected}'.")
 
         index += 1
 
