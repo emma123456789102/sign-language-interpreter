@@ -20,7 +20,7 @@ public class ARSessionManager : MonoBehaviour
 
     public void StartARSession()
     {
-        if (arSession != null && arSession.state == ARSessionState.None)
+        if (arSession != null && ARSession.state == ARSessionState.None)
         {
             arSession.Reset(); // Reset the session if needed
             arSession.enabled = true; // Enable the AR session
