@@ -1,5 +1,5 @@
 🧠 Sign Language Interpreter – ASL Interpreter for AR Glasses
-A multi-component system that uses machine learning, computer vision, AR glasses, and natural language processing to interpret British Sign Language (BSL) in real time.
+A multi-component system that uses machine learning, computer vision, AR glasses, and natural language processing to interpret American Sign Language (ASL) in real time.
 
 📁 Project Structure
 bash
@@ -146,9 +146,9 @@ Press Play in Unity. Gesture data should now stream from Flask to Unity and disp
 
 Name	Role
 Emma Davidson	AI/ML Specialist • Unity Developer • RASA Developer
-Annie O'Boyle	Essay Writer & Documentation
+Annie O'Boyle	Essay Writer • Documentation
 Neil	Dialogue Management • RASA Integration
-Sarah Jade Ruthven	Unity Developer
+Sarah Jade Ruthven	Unity Developer • Facial Recognision • Signing
 📜 License
 This project is licensed under the MIT License.
 
