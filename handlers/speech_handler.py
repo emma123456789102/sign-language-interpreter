@@ -4,9 +4,20 @@ import requests
 import time
 import sys
 
+import pyttsx3
+
 tts_engine = pyttsx3.init()
 voices = tts_engine.getProperty('voices')
-tts_engine.setProperty('voice', voices[2].id)
+
+# Print all available voices
+for i, voice in enumerate(voices):
+    print(f"Voice {i}: {voice.name} - {voice.id}")
+
+# Use the first available voice as a fallback
+if len(voices) > 2:
+    tts_engine.setProperty('voice', voices[2].id)
+else:
+    tts_engine.setProperty('voice', voices[0].id)  # fallback to first voice
 
 recognizer = sr.Recognizer()
 
