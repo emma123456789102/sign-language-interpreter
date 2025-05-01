@@ -1,51 +1,108 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelBinarizer
+from sklearn.metrics import confusion_matrix, classification_report
+
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow.keras.utils import to_categorical
-from sklearn.model_selection import train_test_split
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-# Load the dataset
-train_df = pd.read_csv("C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/data/sign_mnist_test.csv")
-test_df = pd.read_csv("C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/data/sign_mnist_test.csv")
+# ---------------------------
+# 1. Load Dataset
+# ---------------------------
+train_df = pd.read_csv('C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/data/sign_mnist_train/sign_mnist_train.csv')
+test_df = pd.read_csv('C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/data/sign_mnist_test/sign_mnist_test.csv')
 
-# Separate labels and features
-x_train = train_df.iloc[:, 1:].values
-y_train = train_df.iloc[:, 0].values
-x_test = test_df.iloc[:, 1:].values
-y_test = test_df.iloc[:, 0].values
+# Separate features and labels
+y_train = train_df['label']
+X_train = train_df.drop('label', axis=1)
 
-# Normalize pixel values
-x_train = x_train / 255.0
-x_test = x_test / 255.0
+y_test = test_df['label']
+X_test = test_df.drop('label', axis=1)
 
-# Reshape to image format (28x28x1)
-x_train = x_train.reshape(-1, 28, 28, 1)
-x_test = x_test.reshape(-1, 28, 28, 1)
+# ---------------------------
+# 2. Preprocess Data
+# ---------------------------
+# Reshape and normalize
+X_train = X_train.values.reshape(-1, 28, 28, 1).astype('float32') / 255.0
+X_test = X_test.values.reshape(-1, 28, 28, 1).astype('float32') / 255.0
 
 # One-hot encode labels
-y_train = to_categorical(y_train, num_classes=25)
-y_test = to_categorical(y_test, num_classes=25)
+label_bin = LabelBinarizer()
+y_train = label_bin.fit_transform(y_train)
+y_test = label_bin.transform(y_test)
 
-# Define the model
+# ---------------------------
+# 3. Data Augmentation (optional, simplify first)
+# ---------------------------
+train_datagen = ImageDataGenerator()
+
+# ---------------------------
+# 4. Build Model
+# ---------------------------
 model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
-    MaxPooling2D((2, 2)),
-    Conv2D(64, (3, 3), activation='relu'),
-    MaxPooling2D((2, 2)),
+    Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=(28, 28, 1)),
+    MaxPooling2D(pool_size=(2, 2)),
+
+    Conv2D(128, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D(pool_size=(2, 2)),
+
+    Conv2D(256, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D(pool_size=(2, 2)),
+
     Flatten(),
-    Dropout(0.5),
-    Dense(128, activation='relu'),
-    Dense(25, activation='softmax')  # 25 letters (A–Z minus J)
+    Dense(256, activation='relu'),
+    Dropout(0.1),
+    Dense(24, activation='softmax')  # A-Y excluding J & Z
 ])
 
+# ---------------------------
+# 5. Compile Model
+# ---------------------------
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Train the model
-model.fit(x_train, y_train, epochs=10, validation_data=(x_test, y_test))
+# ---------------------------
+# 6. Train Model
+# ---------------------------
+history = model.fit(
+    train_datagen.flow(X_train, y_train, batch_size=64),
+    epochs=15,
+    validation_data=(X_test, y_test)
+)
 
-# Save the model
-model.save("sign_language_model.h5")
+# ---------------------------
+# 7. Evaluate Model
+# ---------------------------
+test_loss, test_accuracy = model.evaluate(X_test, y_test)
+print("\n✅ Test accuracy:", test_accuracy)
 
-print("✅ Model trained and saved as sign_language_model.h5")
+# ---------------------------
+# 8. Confusion Matrix
+# ---------------------------
+y_pred = model.predict(X_test)
+y_pred_classes = np.argmax(y_pred, axis=1)
+y_true = np.argmax(y_test, axis=1)
+
+cm = confusion_matrix(y_true, y_pred_classes)
+plt.figure(figsize=(12, 10))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.title("Confusion Matrix")
+plt.show()
+
+# ---------------------------
+# 9. Classification Report
+# ---------------------------
+print(classification_report(y_true, y_pred_classes))
+
+# ---------------------------
+# 10. Save Model
+# ---------------------------
+model.save('asl_model_improved.h5')
+print("✅ Model saved as asl_model_debugged.h5")
