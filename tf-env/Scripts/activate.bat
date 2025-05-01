@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Emma Davidson\OneDrive - Edinburgh Napier University\Desktop\sign language interpreter\sign-language-interpreter-1\tf-env
+set VIRTUAL_ENV=C:\Users\jadex\OneDrive\Desktop\github stuff\sign-language-interpreter\tf-env
 
 if not defined PROMPT set PROMPT=$P$G
 

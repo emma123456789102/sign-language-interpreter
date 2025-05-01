@@ -12,7 +12,7 @@ RASA_PYTHON = os.path.abspath("venv_rasa/Scripts/python.exe")
 processes = {
     "Hand Tracking": [TRACKING_PYTHON, "code/hand_tracking.py"],
     "Rasa Actions": [RASA_PYTHON, "-m", "rasa", "run", "actions"],
-    "Rasa Server": [RASA_PYTHON, "-m", "rasa", "run", "--enable-api", "--cors", "*"],
+    "Rasa Server": [RASA_PYTHON, "-m", "rasa", "run", "--enable-api", "*"],
 }
 
 subprocesses = {}
