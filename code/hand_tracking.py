@@ -8,7 +8,7 @@ import time
 import os
 
 # === Load Model ===
-model_path = "C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/code/asl_model_improved.h5"
+model_path = "C:/Users/Emma Davidson/PycharmProjects/sign-language-interpreter/code/sign_language_model.h5"
 
 if not os.path.isfile(model_path):
     raise FileNotFoundError(f"Model file not found: {model_path}")
