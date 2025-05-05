@@ -3,15 +3,14 @@ import pyttsx3
 import requests
 import time
 import sys
-
 import pyttsx3
 
 tts_engine = pyttsx3.init()
 voices = tts_engine.getProperty('voices')
 
 # Print all available voices
-for i, voice in enumerate(voices):
-    print(f"Voice {i}: {voice.name} - {voice.id}")
+# for i, voice in enumerate(voices):
+#     print(f"Voice {i}: {voice.name} - {voice.id}")
 
 # Use the first available voice as a fallback
 if len(voices) > 2:
@@ -65,6 +64,7 @@ while not rasa_available():
     time.sleep(2)
 
 print("Rasa server is up. Starting speech interface...")
+print("You can says things like: 'What is the current gesture?', 'How am I feeling?', 'Start the Alphabet quiz' and 'Shall we play a game?'.")
 
 try:
     while True:

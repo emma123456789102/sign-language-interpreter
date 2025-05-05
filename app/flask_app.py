@@ -23,7 +23,7 @@ CORS(app)
 # Global state
 current_gesture = "None"
 current_emotion = "N/A"
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 def preprocess_hand(img):
     img = cv2.resize(img, (28, 28))
@@ -102,6 +102,10 @@ def get_gesture():
 @app.route('/emotion', methods=['GET'])
 def get_emotion():
     return jsonify({'emotion': current_emotion})
+
+@app.route('/tracking', methods=['GET'])
+def get_tracking():
+    return jsonify({'gesture': current_gesture, 'emotion': current_emotion})
 
 if __name__ == "__main__":
     threading.Thread(target=camera_loop, daemon=True).start()

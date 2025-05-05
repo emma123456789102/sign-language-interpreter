@@ -33,7 +33,7 @@ The hand tracking and RASA have incompatible package requirements, so two virtua
 python -m venv venv_tracking
 source venv_tracking/bin/activate  # Mac/Linux
 venv_tracking\Scripts\activate     # Windows
-pip install mediapipe opencv-python numpy pandas tensorflow keras flask flask-cors
+pip install mediapipe opencv-python numpy pandas tensorflow keras flask flask-cors deepface tf-keras
 ```
 If using R for training:
 
