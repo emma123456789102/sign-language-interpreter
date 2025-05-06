@@ -149,12 +149,14 @@ kotlin
 
 ❌ Optimize real-time AR performance for mobile/edge devices
 
-💡 Contributors
-Name	Role(s)
-Emma Davidson	AI/ML Specialist • Unity Developer • RASA Developer
-Annie O'Boyle	Essay Writer • Documentation
-Neil	Dialogue Management • RASA Integration
-Sarah Jade Ruthven	Unity Developer • Facial Recognition • Sign Animation
+## 💡 Contributors
+
+| Name                | Role(s)                                                         |
+|---------------------|------------------------------------------------------------------|
+| **Emma Davidson**   | AI/ML Specialist • Unity Developer • RASA Developer             |
+| **Annie O'Boyle**   | Essay Writer • Documentation                                     |
+| **Neil**            | Dialogue Management • RASA Integration                          |
+| **Sarah Jade Ruthven** | Unity Developer • Facial Recognition • Sign Animation      |
 
 📜 License
 This project is licensed under the MIT License.
