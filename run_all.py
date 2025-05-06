@@ -11,7 +11,6 @@ RASA_PYTHON = os.path.abspath("venv_rasa/Scripts/python.exe")
 
 processes = {
     "Hand Tracking": [TRACKING_PYTHON, "app/flask_app.py"],
-    "Emotion Recognition": [TRACKING_PYTHON, "code/emotion_recognition.py"],
     "Rasa Actions": [RASA_PYTHON, "-m", "rasa", "run", "actions"],
     "Rasa Server": [RASA_PYTHON, "-m", "rasa", "run", "--enable-api", "--cors", "'*'", "--debug"],
 }
