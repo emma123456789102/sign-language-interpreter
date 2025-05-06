@@ -113,7 +113,7 @@ cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
 🔄 Quick Demo
 Run everything with:
 
-bash
+''bash
 Copy
 Edit
 python run_all.py
