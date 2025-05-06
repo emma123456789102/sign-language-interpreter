@@ -67,6 +67,17 @@ venv_rasa\Scripts\activate
 
 pip install rasa pyttsx3 SpeechRecognition pyaudio
 ```
+---
+
+## 🔄 Quick Start
+
+In a new terminal, not inside any virtual environment, Run everything with:
+
+```bash
+python run_all.py
+```
+
+This script sets up and launches all required services using the appropriate virtual environments.
 
 ---
 
@@ -120,18 +131,6 @@ model.save("asl_model.h5")
 
 ---
 
-## 🔄 Quick Demo
-
-Run everything with:
-
-```bash
-python run_all.py
-```
-
-This script sets up and launches all required services using the appropriate virtual environments.
-
----
-
 ## 🐞 Debug Mode (4-Terminal Setup)
 
 1. **Terminal 1 – Hand Tracking:**
@@ -168,7 +167,9 @@ Try sample prompts:
 
 ```
 > What gesture is this?
-> Test me
+> How am I feeling?
+> Start the Alphabet quiz
+> Shall we play a game?
 ```
 
 ---

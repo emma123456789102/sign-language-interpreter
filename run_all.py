@@ -6,13 +6,15 @@ import os
 
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
+# Set paths for Python executables. These will be used instead of activating the virtual environments.
 TRACKING_PYTHON = os.path.abspath("venv_tracking/Scripts/python.exe")
 RASA_PYTHON = os.path.abspath("venv_rasa/Scripts/python.exe")
 
+# Define the processes to be run together.
 processes = {
     "Hand Tracking": [TRACKING_PYTHON, "app/flask_app.py"],
     "Rasa Actions": [RASA_PYTHON, "-m", "rasa", "run", "actions"],
-    "Rasa Server": [RASA_PYTHON, "-m", "rasa", "run", "--enable-api", "--cors", "'*'", "--debug"],
+    "Rasa Server": [RASA_PYTHON, "-m", "rasa", "run", "--enable-api", "--cors", "'*'"],
 }
 
 subprocesses = {}
@@ -33,9 +35,11 @@ for name, cmd in processes.items():
     subprocesses[name] = proc
     threading.Thread(target=stream_output, args=(name, proc), daemon=True).start()
 
+# Start the speech handler in a separate window
 speech_cmd = f'start "Speech Handler" cmd.exe /k ""{RASA_PYTHON}" handlers/speech_handler.py"'
 subprocess.Popen(speech_cmd, shell=True)
 
+# Coordinate shutdown of all processes
 try:
     while True:
         for name, proc in subprocesses.items():

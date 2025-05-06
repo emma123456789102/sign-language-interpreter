@@ -13,6 +13,7 @@ def get_current_tracking_state():
         print(f"[RASA] Error fetching tracking state: {e}")
         return None, None
 
+# Start the letter quiz
 class ActionLetterQuizStart(Action):
     def name(self):
         return "action_quiz_start"
@@ -33,6 +34,7 @@ class ActionLetterQuizStart(Action):
             SlotSet("quiz_mode", "letter")
         ]
 
+# Check the letter and give feedback to user. Exit quiz when finished.
 class ActionLetterQuizCheckLetter(Action):
     def name(self):
         return "action_quiz_check_letter"
@@ -93,6 +95,7 @@ class ActionLetterQuizCheckLetter(Action):
         index += 1
 
         if index >= len(quiz_letters):
+            # Exit quiz and provide final score
             dispatcher.utter_message(text=f"All done! You got {score} out of {len(quiz_letters)}.")
             return [
                 SlotSet("quiz_letters", []),
@@ -124,6 +127,7 @@ class ActionLetterQuizRepeatLetter(Action):
             dispatcher.utter_message(text="No quiz running. Say 'Start the alphabet quiz' to begin.")
         return []
 
+# End quiz early
 class ActionLetterQuizEnd(Action):
     def name(self):
         return "action_quiz_end"
@@ -145,6 +149,7 @@ class ActionLetterQuizEnd(Action):
             SlotSet("quiz_index", 0)
         ]
 
+# Reset gesture recognition
 class ActionResetGesture(Action):
     def name(self):
         return "action_gesture_reset"

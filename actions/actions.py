@@ -11,6 +11,7 @@ import requests
 from actions.letter_quiz_actions import ActionLetterQuizCheckLetter
 from actions.word_quiz_actions import ActionWordQuizCheckLetter
 
+# Get current gesture from Flask API
 class ActionReturnCurrentGesture(Action):
     def name(self):
         return "action_gesture_return_current"
@@ -24,6 +25,7 @@ class ActionReturnCurrentGesture(Action):
             dispatcher.utter_message(text="Sorry, I couldn't get your current gesture.")
         return []
 
+# Get current emotion from Flask API
 class ActionReturnCurrentEmotion(Action):
     def name(self):
         return "action_emotion_return_current"
@@ -36,7 +38,8 @@ class ActionReturnCurrentEmotion(Action):
         except Exception as e:
             dispatcher.utter_message(text="Sorry, I couldn't get your current emotion.")
         return []
-    
+
+# Get current gesture and emotion from Flask API
 class ActionReturnCurrentState(Action):
     def name(self):
         return "action_state_return_current"
@@ -50,7 +53,8 @@ class ActionReturnCurrentState(Action):
         except Exception as e:
             dispatcher.utter_message(text="Sorry, I couldn't fetch the state.")
         return []
-    
+
+# Determine which quiz is running and call appropriate action
 class ActionCheckLetterByQuizMode(Action):
     def name(self):
         return "action_check_letter_by_quiz_mode"

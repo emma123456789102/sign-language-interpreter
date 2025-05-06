@@ -4,6 +4,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, ActiveLoop
 
+# Get current gesture and emotion from Flask API
 def get_current_tracking_state():
     try:
         response = requests.get("http://localhost:5000/tracking")
@@ -12,7 +13,8 @@ def get_current_tracking_state():
     except Exception as e:
         print(f"[RASA] Error fetching tracking state: {e}")
         return None, None
-    
+
+# Start the word quiz
 class ActionWordQuizStart(Action):
     def name(self):
         return "action_word_quiz_start"
@@ -34,7 +36,8 @@ class ActionWordQuizStart(Action):
             SlotSet("quiz_score", 0),
             SlotSet("quiz_mode", "word")
         ]
-    
+
+# Check the letter and give feedback to user. Exit quiz when finished.
 class ActionWordQuizCheckLetter(Action):
     def name(self):
         return "action_word_quiz_check_letter"
@@ -90,7 +93,7 @@ class ActionWordQuizCheckLetter(Action):
 
         index += 1
         if index >= len(quiz_letters):
-
+            # Exit quiz and provide final score
             if score == 0:
                 final_message = f"You didn't get any letters right, but it can only get better from here!"
             elif score < len(quiz_letters) / 2:

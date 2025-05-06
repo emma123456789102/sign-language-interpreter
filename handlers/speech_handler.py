@@ -8,11 +8,11 @@ import pyttsx3
 tts_engine = pyttsx3.init()
 voices = tts_engine.getProperty('voices')
 
-# Print all available voices
+# Print available voices
 # for i, voice in enumerate(voices):
 #     print(f"Voice {i}: {voice.name} - {voice.id}")
 
-# Use the first available voice as a fallback
+# Use voice 2 if available
 if len(voices) > 2:
     tts_engine.setProperty('voice', voices[2].id)
 else:
@@ -23,6 +23,7 @@ recognizer = sr.Recognizer()
 RASA_REST_ENDPOINT = "http://localhost:5005/webhooks/rest/webhook"
 RASA_STATUS_ENDPOINT = "http://localhost:5005/status"
 
+# Check is Rasa server has started
 def rasa_available():
     try:
         response = requests.get(RASA_STATUS_ENDPOINT)
@@ -30,6 +31,7 @@ def rasa_available():
     except requests.exceptions.RequestException:
         return False
 
+# Listen to microphone input
 def listen():
     with sr.Microphone() as source:
         print("Speak now:")
@@ -50,6 +52,7 @@ def speak(text):
     tts_engine.say(text)
     tts_engine.runAndWait()
 
+# Send user input to Rasa
 def send_to_rasa(user_input):
     payload = {"sender": "user", "message": user_input}
     try:
@@ -66,6 +69,7 @@ while not rasa_available():
 print("Rasa server is up. Starting speech interface...")
 print("You can says things like: 'What is the current gesture?', 'How am I feeling?', 'Start the Alphabet quiz' and 'Shall we play a game?'.")
 
+# Main loop to listen for input. Shuts down if Rasa becomes unavailable.
 try:
     while True:
         if not rasa_available():
