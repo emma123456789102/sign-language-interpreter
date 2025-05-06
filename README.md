@@ -23,8 +23,7 @@ sign-language-interpreter/
 └── README.md # Project documentation
 
 yaml
-Copy
-Edit
+
 
 ---
 
@@ -50,14 +49,12 @@ pip install mediapipe opencv-python numpy pandas tensorflow keras flask flask-co
 Optional R packages for training in R:
 
 r
-Copy
-Edit
+
 install.packages("randomForest")
 install.packages("keras")
 Terminal 2 – RASA
 bash
-Copy
-Edit
+
 #### Terminal 2 – RASA
 py -3.10 -m venv venv_rasa
 source venv_rasa/bin/activate            # Mac/Linux
@@ -66,8 +63,7 @@ pip install rasa pyttsx3 SpeechRecognition pyaudio
 🎥 How It Works
 📷 Step 1: Capture Video Input
 python
-Copy
-Edit
+
 import cv2
 
 cap = cv2.VideoCapture(0)
@@ -81,8 +77,7 @@ cap.release()
 cv2.destroyAllWindows()
 ✋ Step 2: Extract Hand & Pose Keypoints (Mediapipe)
 python
-Copy
-Edit
+
 import mediapipe as mp
 
 mp_hands = mp.solutions.hands
@@ -90,16 +85,14 @@ hands = mp_hands.Hands()
 🧠 Step 3: Train AI Model
 In R:
 r
-Copy
-Edit
+
 library(randomForest)
 data <- read.csv("asl_dataset.csv")
 model <- randomForest(label ~ ., data = data, ntree = 200)
 saveRDS(model, "asl_rf_model.rds")
 In Python:
 python
-Copy
-Edit
+
 from tensorflow.keras.models import Sequential
 
 model = Sequential([...])
@@ -109,8 +102,7 @@ model.save("asl_model.h5")
 Run everything with:
 
 ''bash
-Copy
-Edit
+
 python run_all.py
 This sets up and launches all required services using the correct virtual environments.
 
@@ -120,38 +112,32 @@ Open four terminals:
 Terminal 1: Hand tracking
 
 bash
-Copy
-Edit
+
 python code/hand_tracking.py
 Terminal 2: RASA actions
 
 bash
-Copy
-Edit
+
 rasa run actions
 Terminal 3: RASA server
 
 bash
-Copy
-Edit
+
 rasa run --enable-api --cors "*" --debug
 Terminal 4: Speech handler
 
 bash
-Copy
-Edit
+
 python handlers/speech_handler.py
 To retrain intents, run:
 
 bash
-Copy
-Edit
+
 rasa train
 Try sample prompts:
 
 kotlin
-Copy
-Edit
+
 > What gesture is this?
 > Test me
 
@@ -179,11 +165,11 @@ Real-time. Accessible. Inclusive.
 
 yaml
 Copy
-Edit
+
 
 ---
 
-Let me know if you'd like a downloadable version of this or want help setting it up on your GitHub Pages or website.
+
 
 
 
