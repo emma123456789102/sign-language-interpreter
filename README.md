@@ -104,12 +104,6 @@ from tensorflow.keras.models import Sequential
 model = Sequential([...])
 model.fit(X_train, y_train, epochs=50, batch_size=16)
 model.save("asl_model.h5")
-🕶️ Step 4: Real-Time Captioning in AR
-python
-Copy
-Edit
-cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-🧪 Running the Project
 🔄 Quick Demo
 Run everything with:
 
@@ -168,7 +162,7 @@ Edit
 
 ❌ Optimize real-time AR performance for mobile/edge devices
 
-💡 Contributors
+#####💡 Contributors
 Name	Role(s)
 Emma Davidson	AI/ML Specialist • Unity Developer • RASA Developer
 Annie O'Boyle	Essay Writer • Documentation
