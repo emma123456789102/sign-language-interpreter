@@ -58,6 +58,7 @@ Terminal 2 – RASA
 bash
 Copy
 Edit
+#### Terminal 2 – RASA
 py -3.10 -m venv venv_rasa
 source venv_rasa/bin/activate            # Mac/Linux
 venv_rasa\Scripts\activate               # Windows
@@ -154,7 +155,7 @@ Edit
 > What gesture is this?
 > Test me
 
-
+---
 📌 Challenges & Future Improvements
 ❌ Improve ASL recognition accuracy with a larger dataset
 
