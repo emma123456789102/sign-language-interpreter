@@ -5,6 +5,7 @@ import numpy as np
 import mediapipe as mp
 from tensorflow.keras.models import load_model
 from flask_cors import CORS
+from deepface import DeepFace
 import time
 
 # Load the gesture recognition model
@@ -21,6 +22,7 @@ CORS(app)
 
 # Global state
 current_gesture = "None"
+current_emotion = "N/A"
 cap = cv2.VideoCapture(0)
 
 def preprocess_hand(img):
@@ -35,8 +37,17 @@ def predict_gesture(hand_img):
     class_index = np.argmax(prediction)
     return chr(class_index + 65)  # A-Z
 
+def analyze_emotion(frame):
+    try:
+        result = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=False)
+        return result[0]['dominant_emotion']
+    except:
+        return "N/A"
+
 def camera_loop():
-    global current_gesture
+    global current_gesture, current_emotion
+
+    frame_count = 0  # For reducing DeepFace frequency
 
     while True:
         ret, frame = cap.read()
@@ -64,11 +75,18 @@ def camera_loop():
         else:
             current_gesture = "None"
 
+        # --- Emotion analysis every few frames to reduce lag ---
+        if frame_count % 30 == 0:
+            current_emotion = analyze_emotion(frame)
+        frame_count += 1
+
         # Display info on frame
         cv2.putText(frame, f"Gesture: {current_gesture}", (10, 40),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
+        cv2.putText(frame, f"Emotion: {current_emotion}", (10, 80),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.2, (255, 100, 100), 2)
 
-        cv2.imshow("Sign Recognition", frame)
+        cv2.imshow("Sign + Emotion Recognition", frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -80,6 +98,14 @@ def camera_loop():
 @app.route('/gesture', methods=['GET'])
 def get_gesture():
     return jsonify({'gesture': current_gesture})
+
+@app.route('/emotion', methods=['GET'])
+def get_emotion():
+    return jsonify({'emotion': current_emotion})
+
+@app.route('/tracking', methods=['GET'])
+def get_tracking():
+    return jsonify({'gesture': current_gesture, 'emotion': current_emotion})
 
 if __name__ == "__main__":
     threading.Thread(target=camera_loop, daemon=True).start()
