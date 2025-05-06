@@ -1,5 +1,5 @@
 🧠 Sign Language Interpreter – ASL Interpreter for AR Glasses
-A multi-component system that uses machine learning, computer vision, AR glasses, and natural language processing to interpret American Sign Language (ASL) in real time.
+A multi-component system that uses machine learning, computer vision, web camera, and natural language processing to interpret American Sign Language (ASL) in real time.
 
 📁 Project Structure
 bash
