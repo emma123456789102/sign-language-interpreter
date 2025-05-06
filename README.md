@@ -162,7 +162,7 @@ Edit
 
 ❌ Optimize real-time AR performance for mobile/edge devices
 
-#####💡 Contributors
+#####Contributors 💡
 Name	Role(s)
 Emma Davidson	AI/ML Specialist • Unity Developer • RASA Developer
 Annie O'Boyle	Essay Writer • Documentation
