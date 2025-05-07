@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class RasaConnector : MonoBehaviour
 {
-    private const string RasaEndpoint = "http://localhost:5005/webhooks/rest/webhook"; // Update with your Rasa server URL
+    private const string RasaEndpoint = // update this with the RASA server URL when you know it
 
     public void SendVisualDataToRasa(byte[] imageData)
     {
