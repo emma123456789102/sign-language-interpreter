@@ -51,7 +51,12 @@ https://www.youtube.com/watch?v=nhpVEsrz5Xc&t=307s
 [Evaluating the translation of speech to virtually-performed sign language on AR glasses]
 https://ieeexplore.ieee.org/abstract/document/9465430?casa_token=ycy2_uII5XAAAAAA:5iCGSKys2WooFHN26Yqbdvhw8AHpckZYlhla8zjtBwdLdKeDChY6oqaJ25Dms-t8qRPt_DL1Pw
 
-Thank you so much for looking at this attempt at a Unity Interface for the NREAL Light Glasses and thank you for help my groupmembers and I build an ASL interpretor that is still very successful - despite the lack of the AR glasses.
-
 [AR glasses for sign language recognition based on deep learning]
 https://ieeexplore.ieee.org/abstract/document/10351656?casa_token=xdLvEqISfIMAAAAA:BHBXqNfthukLezLwqDHUsFSUVVIoucOufdPYzIPE0xs6K6ycwck2zZx0FIDgBcdA8g4UjKS3PA
+
+[Rasa-Unity]
+https://github.com/retrogeek46/Rasa-Unity
+
+
+
+Thank you so much for looking at this attempt at a Unity Interface for the NREAL Light Glasses and thank you for help my groupmembers and I build an ASL interpretor that is still very successful - despite the lack of the AR glasses.
