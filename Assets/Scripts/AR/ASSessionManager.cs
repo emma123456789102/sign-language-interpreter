@@ -14,7 +14,7 @@ public class ARSessionManager : MonoBehaviour
             return;
         }
 
-        // Start the AR session
+        // this starts the AR session
         StartARSession();
     }
 
