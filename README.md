@@ -31,16 +31,23 @@ Assets / Scripts
 ## References
 Here are the references that I used in my personal research and understanding in order to build this attempt at a Unity interface for Sign Languager Interpretation.
 
-[Introducing NRSDK] https://nrealsdkdoc.readthedocs.io/en/latest/Docs/Unity_EN/Discover/IntroducingNRSDK.html
+[Introducing NRSDK] 
+https://nrealsdkdoc.readthedocs.io/en/latest/Docs/Unity_EN/Discover/IntroducingNRSDK.html
+
 [AR development in Unity]
 https://docs.unity3d.com/6000.1/Documentation/Manual/AROverview.html
+
 [XREAL SDK Overview]
 https://docs.xreal.com/
+
 [Create an XR project]
 https://docs.unity3d.com/6000.0/Documentation/Manual/xr-create-projects.html
+
 [XREAL Youtube]
 https://www.youtube.com/watch?v=nhpVEsrz5Xc&t=307s
+
 [Evaluating the translation of speech to virtually-performed sign language on AR glasses]
 https://ieeexplore.ieee.org/abstract/document/9465430?casa_token=ycy2_uII5XAAAAAA:5iCGSKys2WooFHN26Yqbdvhw8AHpckZYlhla8zjtBwdLdKeDChY6oqaJ25Dms-t8qRPt_DL1Pw
+
 [AR glasses for sign language recognition based on deep learning]
 https://ieeexplore.ieee.org/abstract/document/10351656?casa_token=xdLvEqISfIMAAAAA:BHBXqNfthukLezLwqDHUsFSUVVIoucOufdPYzIPE0xs6K6ycwck2zZx0FIDgBcdA8g4UjKS3PA
