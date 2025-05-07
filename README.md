@@ -5,6 +5,8 @@ Thank you for looking at my contribution to this coursework submission. The Unit
 
 Because at the moment this Unity interface is not deployable, I made sure to leave some comments that explain why some code is incomplete or not connected to the implmented project. This was because I knew that I was supposed to use and call on certain aspects of the different portions of this project but did not know the syntax before possible implmentation. 
 
+This Unity attempt only captures visual data - as at the time of building the interface I was not sure is audio data for TTS was going to be needed to be captured as well.
+
 Because the Unity interface was unable to be deployed, below is a visual representation of the hierarchy of the Unity code:
 
 Assets / Scripts
