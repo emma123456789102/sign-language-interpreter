@@ -3,6 +3,8 @@
 
 Thank you for looking at my contribution to this coursework submission. The Unity portion of the project has been moved to this specific branch to not interfere with the deployed portion of the coursework.
 
+Because at the moment this Unity interface is not deployable, I made sure to leave some comments that explain why some code is incomplete or not connected to the implmented project. This was because I knew that I was supposed to use and call on certain aspects of the different portions of this project but did not know the syntax before possible implmentation. 
+
 Because the Unity interface was unable to be deployed, below is a visual representation of the hierarchy of the Unity code:
 
 Assets / Scripts
@@ -48,6 +50,8 @@ https://www.youtube.com/watch?v=nhpVEsrz5Xc&t=307s
 
 [Evaluating the translation of speech to virtually-performed sign language on AR glasses]
 https://ieeexplore.ieee.org/abstract/document/9465430?casa_token=ycy2_uII5XAAAAAA:5iCGSKys2WooFHN26Yqbdvhw8AHpckZYlhla8zjtBwdLdKeDChY6oqaJ25Dms-t8qRPt_DL1Pw
+
+Thank you so much for looking at this attempt at a Unity Interface for the NREAL Light Glasses and thank you for help my groupmembers and I build an ASL interpretor that is still very successful - despite the lack of the AR glasses.
 
 [AR glasses for sign language recognition based on deep learning]
 https://ieeexplore.ieee.org/abstract/document/10351656?casa_token=xdLvEqISfIMAAAAA:BHBXqNfthukLezLwqDHUsFSUVVIoucOufdPYzIPE0xs6K6ycwck2zZx0FIDgBcdA8g4UjKS3PA
