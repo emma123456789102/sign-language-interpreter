@@ -1,0 +1,42 @@
+version: "3.1"
+
+rules:
+- rule: Get current gesture
+  steps:
+    - intent: ask_current_gesture
+    - action: action_gesture_return_current
+
+- rule: Get current emotion
+  steps:
+    - intent: ask_current_emotion
+    - action: action_emotion_return_current
+
+# Letter Quiz rules
+- rule: Start quiz
+  steps:
+    - intent: quiz_start
+    - action: action_quiz_start
+
+- rule: Check quiz letter
+  steps:
+    - intent: quiz_confirm_ready
+    - action: action_check_letter_by_quiz_mode
+
+- rule: Repeat current quiz letter
+  condition:
+    - slot_was_set:
+        - quiz_mode: letter
+  steps:
+    - intent: quiz_repeat
+    - action: action_quiz_repeat_letter
+
+- rule: End quiz
+  steps:
+    - intent: quiz_end
+    - action: action_quiz_end
+
+# Word Quiz rules
+- rule: Start the word quiz
+  steps:
+    - intent: word_quiz_start
+    - action: action_word_quiz_start
