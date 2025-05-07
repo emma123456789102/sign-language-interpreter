@@ -1,6 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class RasaResponseModel
 {
-    
+    public string recipient_id; // this is where the ID of where to sent it goes - I just added recipient_id as a place holder for a potential RASA ID
+    public string text; // the text response from RASA would go here
+    public List<Attachment> attachments; // At the time of working on this I was not sure of that kind of attachments that would be able to be given from RASA
+
+    [System.Serializable]
+    public class Attachment
+    {
+        public string type; // Potential type of the attachment here
+        public string payload; // this is for the payload data for the attachment
+    }
 }
