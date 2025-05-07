@@ -37,7 +37,9 @@ public class RasaConnector : MonoBehaviour
 
     private void ProcessRasaResponse(string response)
     {
-        // processes the response from RASA
-        Debug.Log($"Rasa Response: {response}");
+    // this is assuming that the response contains a text message
+    string captionMessage = ParseResponseForCaption(response);
+    captionDisplay.UpdateCaption(captionMessage);
     }
+
 }
