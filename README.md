@@ -31,7 +31,7 @@ sign-language-interpreter/
 
 ### 1️⃣ Install Dependencies
 
-Ensure you have **Python 3.7–3.10** installed.
+Ensure you have **Python 3.10** installed.
 
 ### 2️⃣ Set Up Virtual Environments
 
@@ -40,7 +40,7 @@ Due to incompatible package requirements between the hand tracking module and RA
 #### 🔹 Terminal 1 – Hand Tracking
 
 ```bash
-python -m venv venv_tracking
+py -3.10 -m venv venv_tracking
 # Activate (Mac/Linux)
 source venv_tracking/bin/activate
 # Activate (Windows)
