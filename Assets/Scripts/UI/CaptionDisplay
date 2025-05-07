@@ -1,25 +1,22 @@
 using UnityEngine;
-using UnityEngine.UI; // Use this if you're using Unity's built-in UI Text
-// using TMPro; // Uncomment this if you're using TextMeshPro
+using UnityEngine.UI;
 
 public class CaptionDisplay : MonoBehaviour
 {
     [SerializeField]
-    private Text captionText; // Use this if you're using Unity's built-in UI Text
-    // [SerializeField]
-    // private TextMeshProUGUI captionText; // Uncomment this if you're using TextMeshPro
+    private Text captionText;
 
     private void Start()
     {
-        // Optionally initialize the caption text
         ClearCaption();
     }
 
+    // this works to update the caption after new data is recieved
     public void UpdateCaption(string newCaption)
     {
         if (captionText != null)
         {
-            captionText.text = newCaption; // Update the caption text
+            captionText.text = newCaption;
             Debug.Log($"Caption updated: {newCaption}");
         }
         else
@@ -28,6 +25,7 @@ public class CaptionDisplay : MonoBehaviour
         }
     }
 
+    // this clears the caption text you prevent overlapping data and also prevent the interface holding onto data that it doesn't need to 
     public void ClearCaption()
     {
         if (captionText != null)
