@@ -4,9 +4,9 @@ using UnityEngine.Networking;
 
 public class NetworkManager : MonoBehaviour
 {
-    private const string RasaEndpoint = "http://localhost:5005/webhooks/rest/webhook"; // Update with your Rasa server URL
-    private const int MaxRetries = 3; // Maximum number of retries for sending data
-    private const float RetryDelay = 2f; // Delay between retries in seconds
+    private const string RasaEndpoint = // update this when you know what the RASA location is ready
+    private const int MaxRetries = 3; // the maximum number of retries for sending data
+    private const float RetryDelay = 2f; // this is the delay between retries in seconds (here as a just in case)
 
     public void SendData(byte[] data)
     {
@@ -15,7 +15,7 @@ public class NetworkManager : MonoBehaviour
 
     private IEnumerator SendDataCoroutine(byte[] data, int attempt)
     {
-        // Create a form to send the data
+        // this creates a form to send the data
         WWWForm form = new WWWForm();
         form.AddBinaryData("image", data, "captured_image.png", "image/png");
 
@@ -27,12 +27,12 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.LogError($"Error sending data to Rasa: {www.error}");
 
-                // Retry logic
+                // this retrys the logic
                 if (attempt < MaxRetries)
                 {
                     Debug.Log($"Retrying... Attempt {attempt + 1}/{MaxRetries}");
                     yield return new WaitForSeconds(RetryDelay);
-                    StartCoroutine(SendDataCoroutine(data, attempt + 1)); // Retry sending data
+                    StartCoroutine(SendDataCoroutine(data, attempt + 1)); // retrys sending the data
                 }
                 else
                 {
@@ -42,7 +42,7 @@ public class NetworkManager : MonoBehaviour
             else
             {
                 Debug.Log("Data sent to Rasa successfully.");
-                // Handle the response from Rasa if needed
+                // handling the response from RASA if it is needed
                 string response = www.downloadHandler.text;
                 ProcessRasaResponse(response);
             }
@@ -51,7 +51,7 @@ public class NetworkManager : MonoBehaviour
 
     private void ProcessRasaResponse(string response)
     {
-        // Process the response from Rasa
+        // processing the response from RASA
         Debug.Log($"Rasa Response: {response}");
         // You can parse the response and update your UI or game state accordingly
     }
