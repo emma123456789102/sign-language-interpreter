@@ -14,7 +14,7 @@ public static class DataProcessor
 
         if (useJpeg)
         {
-            // encoding the texture to JPEG format with (randomly because I was not able to run this without the rest of the project) specified quality
+            // encoding the texture to JPEG format with (guessed because I was not able to run this without the rest of the project) specified quality
             imageData = texture.EncodeToJPG(jpegQuality);
         }
         else
