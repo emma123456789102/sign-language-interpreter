@@ -13,11 +13,11 @@ public class RasaConnector : MonoBehaviour
 
     private IEnumerator SendDataCoroutine(byte[] imageData)
     {
-        // Create a form to send the image data
+        // this creates a form to send the image data
         WWWForm form = new WWWForm();
         form.AddBinaryData("image", imageData, "captured_image.png", "image/png");
 
-        // Send the POST request to the Rasa server
+        // and sending the POST request to the RASA server
         using (UnityWebRequest www = UnityWebRequest.Post(RasaEndpoint, form))
         {
             yield return www.SendWebRequest();
@@ -28,8 +28,7 @@ public class RasaConnector : MonoBehaviour
             }
             else
             {
-                Debug.Log("Visual data sent to Rasa successfully.");
-                // Handle the response from Rasa if needed
+                Debug.Log("Visual data sent to Rasa successfully."); // handling the response from RASA if needed
                 string response = www.downloadHandler.text;
                 ProcessRasaResponse(response);
             }
@@ -38,8 +37,7 @@ public class RasaConnector : MonoBehaviour
 
     private void ProcessRasaResponse(string response)
     {
-        // Process the response from Rasa
+        // processes the response from RASA
         Debug.Log($"Rasa Response: {response}");
-        // You can parse the response and update your UI or game state accordingly
     }
 }
