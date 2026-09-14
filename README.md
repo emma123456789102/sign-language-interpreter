@@ -1,105 +1,205 @@
-# BSL Interpreter for AR Glasses
 
-## 📌 Project Overview
-This project aims to develop a **British Sign Language (BSL) Interpreter** that runs on **AR glasses**. The system captures real-time **BSL gestures**, translates them into **text**, and displays captions on **augmented reality (AR) glasses**.
+# 🧠 Sign Language Interpreter – ASL Interpreter for AR Glasses
 
-## 🚀 Features
-✅ **Real-time BSL recognition** using hand and body tracking
-✅ **Machine learning-powered sign language translation**
-✅ **Text overlay in AR glasses** for live captions
-✅ **Optimized for low-latency performance**
+A multi-component system that uses machine learning, computer vision, a webcam, and natural language processing to interpret American Sign Language (ASL) in real time.
 
-## 📂 Project Structure
+---
+
+## 📁 Project Structure
+
 ```
-📁 BSL-Interpreter-AR
-│── 📂 data            # BSL dataset & extracted keypoints
-│── 📂 models          # Trained machine learning models
-│── 📂 scripts         # Python & R scripts for processing
-│── 📂 ar_display      # AR overlay for captions (Unity/OpenCV)
-│── README.md         # Project documentation
+sign-language-interpreter/
+├── data/               # ASL dataset & extracted keypoints
+├── models/             # Trained machine learning models
+├── actions/            # RASA action components
+├── code/               # Python & R scripts for processing
+├── ar_display/         # AR overlay for captions (Unity/OpenCV)
+├── tests/              # Python model testing for essay
+├── app/                # Flask API (flask_app.py)
+├── config.yml
+├── credentials.yml
+├── domain.yml
+├── endpoints.yml
+├── sign_language_model.h5
+├── training_history.png
+└── README.md           # Project documentation
 ```
+
+---
 
 ## 🛠️ Installation
+
 ### 1️⃣ Install Dependencies
-Make sure you have **Python 3.7 - 3.10** installed. Then, install required libraries:
+
+Ensure you have **Python 3.10** installed.
+
+### 2️⃣ Set Up Virtual Environments
+
+Due to incompatible package requirements between the hand tracking module and RASA, two virtual environments are needed.
+
+#### 🔹 Terminal 1 – Hand Tracking
+
 ```bash
-pip install mediapipe opencv-python numpy pandas tensorflow keras
+py -3.10 -m venv venv_tracking
+# Activate (Mac/Linux)
+source venv_tracking/bin/activate
+# Activate (Windows)
+venv_tracking\Scripts\activate
+
+pip install mediapipe opencv-python numpy pandas tensorflow keras flask flask-cors deepface tf-keras
 ```
-If using R for training:
+
+Optional R packages (if using R for model training):
+
 ```r
 install.packages("randomForest")
 install.packages("keras")
 ```
 
-### 2️⃣ Setup Virtual Environment (Recommended)
+#### 🔹 Terminal 2 – RASA
+
 ```bash
-python -m venv bsl_env
-source bsl_env/bin/activate  # Mac/Linux
-bsl_env\Scripts\activate     # Windows
+py -3.10 -m venv venv_rasa
+# Activate (Mac/Linux)
+source venv_rasa/bin/activate
+# Activate (Windows)
+venv_rasa\Scripts\activate
+
+pip install rasa pyttsx3 SpeechRecognition pyaudio
+```
+---
+
+## 🔄 Quick Start
+
+In a new terminal, not inside any virtual environment, Run everything with:
+
+```bash
+python run_all.py
 ```
 
-### 3️⃣ Clone the Repository
-```bash
-git clone https://github.com/your-repo/BSL-Interpreter-AR.git
-cd BSL-Interpreter-AR
-```
+This script sets up and launches all required services using the appropriate virtual environments.
+
+---
 
 ## 🎥 How It Works
-### Step 1: Capture Video Input
-The AR glasses camera records the **signer’s gestures** in real-time.
+
+### 📷 Step 1: Capture Video Input
+
 ```python
 import cv2
+
 cap = cv2.VideoCapture(0)
 while cap.isOpened():
     ret, frame = cap.read()
-    cv2.imshow("BSL Camera Feed", frame)
-    if cv2.waitKey(1) & 0xFF == ord("q"): break
+    cv2.imshow("ASL Camera Feed", frame)
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
 cap.release()
 cv2.destroyAllWindows()
 ```
 
-### Step 2: Extract Hand & Pose Keypoints
-Using **Mediapipe**, we track **hand and body movement**.
+### ✋ Step 2: Extract Hand & Pose Keypoints (MediaPipe)
+
 ```python
 import mediapipe as mp
+
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 ```
 
-### Step 3: Train AI Model (Using R or Python)
-#### Train a Random Forest Model in R
+### 🧠 Step 3: Train AI Model
+
+In **R**:
+
 ```r
 library(randomForest)
-data <- read.csv("bsl_dataset.csv")
-model <- randomForest(label ~ ., data=data, ntree=200)
-saveRDS(model, "bsl_rf_model.rds")
+data <- read.csv("asl_dataset.csv")
+model <- randomForest(label ~ ., data = data, ntree = 200)
+saveRDS(model, "asl_rf_model.rds")
 ```
-#### Train a Deep Learning Model in Python
+
+In **Python**:
+
 ```python
 from tensorflow.keras.models import Sequential
+
 model = Sequential([...])
 model.fit(X_train, y_train, epochs=50, batch_size=16)
-model.save("bsl_model.h5")
+model.save("asl_model.h5")
 ```
-
-### Step 4: Real-Time Captioning in AR
-Overlay text captions on **AR glasses** using OpenCV or Unity.
-```python
-cv2.putText(frame, "Hello!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-```
-
-## 📌 Challenges & Future Improvements
-❌ Improve **BSL recognition accuracy** with a larger dataset
-❌ Implement **sentence-level sign translation**
-❌ Optimize for **real-time AR processing**
-
-## 💡 Contributors
-- **Emma Davidson** - Developer
-- **everyone else** - AI/ML Specialist
-
-## 📜 License
-This project is licensed under the **MIT License**.
 
 ---
-🌟 **Let’s break communication barriers with AI & AR!** 🚀
 
+## 🐞 Debug Mode (4-Terminal Setup)
+
+1. **Terminal 1 – Hand Tracking:**
+
+   ```bash
+   python code/hand_tracking.py
+   ```
+
+2. **Terminal 2 – RASA Actions:**
+
+   ```bash
+   rasa run actions
+   ```
+
+3. **Terminal 3 – RASA Server:**
+
+   ```bash
+   rasa run --enable-api --cors "*" --debug
+   ```
+
+4. **Terminal 4 – Speech Handler:**
+
+   ```bash
+   python handlers/speech_handler.py
+   ```
+
+To retrain intents:
+
+```bash
+rasa train
+```
+
+Try sample prompts:
+
+```
+> What gesture is this?
+> How am I feeling?
+> Start the Alphabet quiz
+> Shall we play a game?
+```
+
+---
+
+## 📌 Challenges & Future Improvements
+
+- ❌ Improve ASL recognition accuracy with a larger dataset  
+- ❌ Implement sentence-level sign translation  
+- ❌ Optimize real-time AR performance for mobile/edge devices  
+
+---
+
+## 💡 Contributors
+
+| Name                  | Role(s)                                                          |
+|-----------------------|------------------------------------------------------------------|
+| **Emma Davidson**     | AI/ML Specialist • Unity Developer • RASA Developer             |
+| **Annie O'Boyle**     | Essay Writer • Documentation                                     |
+| **Neil**              | Dialogue Management • RASA Integration                           |
+| **Sarah Jade Ruthven**| Unity Developer • Facial Recognition • Sign Animation            |
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🌟 Final Thoughts
+
+Let’s break communication barriers with the power of AI and AR.  
+**Real-time. Accessible. Inclusive.**

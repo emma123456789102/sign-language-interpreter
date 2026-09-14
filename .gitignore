@@ -1,0 +1,8 @@
+venv/
+dataset/
+actions/__pycache__/
+code/__pycache__/
+venv_tracking/
+venv_rasa/
+.rasa/
+tf-env/

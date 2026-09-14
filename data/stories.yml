@@ -1,0 +1,19 @@
+version: "3.1"
+
+# stories:
+# - story: Letter quiz
+#   steps:
+#     - intent: quiz_start
+#     - action: action_quiz_start
+#     - active_loop: letter_quiz_loop
+#     - action: letter_quiz_loop
+#     - active_loop: null
+
+# - story: Word quiz
+#   steps:
+#     - intent: word_quiz_start
+#     - action: action_word_quiz_start
+#     - active_loop: word_quiz_loop
+#     - action: word_quiz_loop
+#     - active_loop: null
+

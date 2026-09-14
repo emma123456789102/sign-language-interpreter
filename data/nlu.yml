@@ -1,0 +1,44 @@
+version: "3.1"
+
+nlu:
+# Basic gesture intent
+- intent: ask_current_gesture
+  examples: |
+    - What is the current gesture?
+    - What letter am I signing?
+    - What sign is this?
+
+- intent: ask_current_emotion
+  examples: |
+    - What is the current emotion?
+    - How am I feeling?
+
+# Quiz intents
+- intent: quiz_start
+  examples: |
+    - Test me
+    - Start the alphabet quiz
+
+- intent: quiz_confirm_ready
+  examples: |
+    - Check me
+    - Ready
+    - Is this correct?
+    - Is this right?
+    - I am ready
+
+- intent: quiz_repeat
+  examples: |
+    - Repeat please
+    - Show me the letter again
+
+- intent: quiz_end
+  examples: |
+    - Quit quiz
+
+- intent: word_quiz_start
+  examples: |
+    - start the word quiz
+    - lets spell a word
+    - shall we play a game?
+    
